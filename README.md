@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 # simple angular bootstrap [![Build Status](https://travis-ci.org/TeemuKoivisto/simple-angular-bootstrap.svg?branch=master)](https://travis-ci.org/TeemuKoivisto/simple-angular-bootstrap) [![Coverage Status](https://coveralls.io/repos/github/TeemuKoivisto/simple-angular-bootstrap/badge.svg?branch=master)](https://coveralls.io/github/TeemuKoivisto/simple-angular-bootstrap?branch=master)
 Simple Angular 1.5 bootstrap with Gulp and Bootstrap.
 
@@ -5,9 +6,9 @@ Simple Angular 1.5 bootstrap with Gulp and Bootstrap.
 This app is ultra small scaffold that I myself use as a base when starting out angular projects. It consists of basic gulp scripts for minifying the code and generic libraries that are useful for getting things done quick and easy.
 
 # How to install
-1. Install Node.js and nvm if you don't have them by now. Newest versions suit very well. 4.-something if you want the production-stable version.
+1. Install Node.js and nvm if you don't have them by now. Newest versions suit very well. 4.-something if you want the production-stable version. Basically it should work if you write ```curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.4/install.sh | bash``` to your terminal. Then ```nvm install 6.3.1``` and maybe ```nvm use 6.3.1```.
 2. Clone this repository and go to the root and enter ```npm i``` or ```npm install```.
-3. After downloading dependencies install gulp and bower globally ```nvm i -g gulp bower```.
+3. After downloading dependencies install gulp and bower globally ```npm i -g gulp bower```.
 4. It's recommended to use Livereload plugin, [here's one for Chrome](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei).
 5. This app uses dotenv for storing environment variables, rename the ```.dev-env``` file in the root of this folder to ```.env``` and anytime you want to use Travis or Heroku remember to add your variables to their config. Or for your own server create your own production ```.env```.
 6. Now you're all set, enter ```gulp start``` to run the development server.
@@ -105,3 +106,5 @@ Aret the Angular version of Web components. If that doesn't say anything think a
 ## factories
 Eh not really too excited about these. If you want to use classes inside your app for some reason you should try using these. Other than that, I'd stay away from them.
 
+=======
+>>>>>>> Stashed changes

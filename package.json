@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^2.0.0",
+    "ejs": "^2.5.1",
     "express": "^4.13.4"
   },
   "devDependencies": {
@@ -39,6 +40,7 @@
     "gulp-livereload": "^3.8.1",
     "gulp-ng-annotate": "^2.0.0",
     "gulp-nodemon": "^2.0.6",
+    "gulp-plumber": "^1.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
     "istanbul": "^1.0.0-alpha.2",
