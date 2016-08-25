@@ -22,11 +22,11 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
             watch: true
         });
         $scope.userLocation = $scope.map.locate()._initialCenter;
-        L.tileLayer('http://api.digitransit.fi/map/v1/{id}/{z}/{x}/{y}.png', {
+        L.tileLayer('https://api.digitransit.fi/map/v1/{id}/{z}/{x}/{y}.png', {
             maxZoom: 16,
             minZoom: 13,
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ',
+                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ',
             id: 'hsl-map'
         }).addTo($scope.map);
 
