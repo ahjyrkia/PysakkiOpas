@@ -22,6 +22,8 @@
     "bootstrap": "^3.3.6",
     "Ionicons": "ionicons#^2.0.1",
     "font-awesome": "^4.6.3",
-    "angular-google-maps": "^2.3.3"
+    "angular-google-maps": "^2.3.3",
+    "leaflet": "^0.7.7",
+    "t": "^0.5.1"
   }
 }
