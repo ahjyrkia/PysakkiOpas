@@ -1,4 +1,4 @@
-var MyApp = angular.module("MyApp", ["ui.router"]);
+var MyApp = angular.module("MyApp", ["ui.router", "leaflet-directive"]);
 
 MyApp.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise("/intro");
@@ -10,9 +10,11 @@ MyApp.config(function($stateProvider, $urlRouterProvider) {
       controller: "MainController",
       controllerAs: "main"
     })
-    .state("main.intro", {
-      url: "intro",
+    .state("intro", {
+      url: "/intro",
       templateUrl: "templates/intro/intro.html",
+      controller: "IntroController",
+      controllerAs: "intro"
     })
     .state("main.login", {
       url: "login",

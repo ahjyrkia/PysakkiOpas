@@ -1,19 +1,5 @@
-<div class="">
-  <section class="ui">
-    <h1 class="header1">MyApp</h1>
-    <h2 class="header1">Is awesome</h2>
-    <!-- <div class="ui segments"> -->
-    <div>
-      <div class="ui two column stackable grid">
-        <div class="column">
-          <p>
-            This is the front page called intro. It's nested inside main-view as you can see from the source code. Main-view consists of navbar and basic styling and intro is just the content.
-          </p>
-        </div>
-        <div class="column">
-          <img class="ui spaced image" src="img/nodejs.png">
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+<input class="input" id="origin" type="text" size="9" autocomplete="off" autocapitalize="off" placeholder="Origin" style="display:block;max-width:600px;width:80%;z-index:1;position:absolute;margin-left:40px;top:10px;">
+<input class="input" id="destination" type="text" size="9" autocomplete="off" autocapitalize="off" placeholder="Where to?" style="display:block;width:80%;z-index:1;position:absolute;margin-left:40px;top:25px;margin-top:20px;">
+<input class="button" ng-click=searchButtonEvent() id="destinationbutton" type="submit" value="asdf" style="display:block;width:40px;z-index:2;position:absolute;margin-left:80%;top:25px;margin-top:20px;">
+
+<div id="map" style="height:{{frameHeight}}px; width:{{frameWidth}}px;" />

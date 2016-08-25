@@ -1,8 +1,20 @@
+
 .main-container {
+  margin:0px;
+  padding:0px;
+  margin-left:0px;
+  padding-left:0px;
+  padding-top:0px;
+  left:0px;
 }
 
 .main-content-container {
-  margin: 15px 15px 15px 230px;
+  margin:0px;
+  padding:0px;
+  margin-left:0px;
+  padding-left:0px;
+  padding-top:0px;
+  left:0px;
 }
 
 .main-content-section {
