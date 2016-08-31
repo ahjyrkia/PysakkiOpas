@@ -257,7 +257,9 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
             }
         }
         busCode = busCode.split(" ")[0];
-
+        if (busCode.indexOf("M") !== -1) {
+            return "<b style=margin:0px;padding:0px;color:orange> M </b> <span style=margin:0px;padding:0px>" + destination + "</span>";
+        }
         if (busCode.substr(0, 3) === "100") {
             return "<b style=margin:0px;padding:0px;color:green> " + busCode.substr(3, busCode.toString().length) + "</b> <span style=margin:0px;padding:0px>" + destination + "</span>";
         }
