@@ -1,9 +1,9 @@
 MyApp.controller('IntroController', function($scope, ApiService, $http, leafletMarkerEvents, $window) {
-    $scope.frameHeight = $(window).height();
-    $scope.frameWidth = $(window).width();
     var resizeMap = function() {
+        $scope.frameHeight = $window.innerHeight;
+        $scope.frameWidth = $window.innerWidth;
         var map = document.getElementById("map");
-        map.style = "height:" + $(window).height() + "px; width:" + $(window).width() + "px;"
+        map.style = "height:" + $scope.frameHeight + "px; width:" + $scope.frameWidth + "px;"
     }
     resizeMap();
     $window.addEventListener("resize", resizeMap, true);
@@ -16,7 +16,9 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
         })
     $scope.map, $scope.userLocation;
     $scope.initMap = function() {
-        $scope.map = L.map('map');
+        $scope.map = L.map('map', {
+            dragging: true,
+        });
         $scope.map.locate({
             setView: true,
             watch: true
@@ -41,6 +43,9 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
         $scope.map.on('drag', function(e) {
             $scope.addMarker()
         });
+        $window.onresize = function(event) {
+            resizeMap();
+        };
         $scope.map.on('zoomend', function(e) {
             $scope.addMarker()
             for (var i = 0; i < $scope.markers.length; i++) {
