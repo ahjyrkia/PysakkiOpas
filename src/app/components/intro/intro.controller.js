@@ -21,8 +21,8 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
         });
         $scope.map.locate({
             watch: true,
-            setView: true,
-            enableHighAccuracy: true
+            setView: true
+            // enableHighAccuracy: true
         });
         $scope.userLocation = $scope.map.locate()._initialCenter;
         L.tileLayer('https://api.digitransit.fi/map/v1/{id}/{z}/{x}/{y}.png', {
@@ -127,8 +127,7 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
         $scope.userMarker.addTo($scope.map);
         $scope.map.locate({
             watch: true,
-            setView: false,
-            enableHighAccuracy: true
+            setView: false
         });
     }
 
