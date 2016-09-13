@@ -17,6 +17,7 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
     $scope.initMap = function() {
         $scope.map = L.map('map', {
             dragging: true,
+            tap: false,
         });
         $scope.map.locate({
             setView: true,
