@@ -21,7 +21,7 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
         });
         $scope.map.locate({
             setView: true,
-            watch: true
+            // watch: true
         });
         $scope.userLocation = $scope.map.locate()._initialCenter;
         L.tileLayer('https://api.digitransit.fi/map/v1/{id}/{z}/{x}/{y}.png', {
