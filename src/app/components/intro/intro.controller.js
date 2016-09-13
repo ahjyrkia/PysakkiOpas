@@ -6,7 +6,6 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
         map.style = "height:" + $scope.frameHeight + "px; width:" + $scope.frameWidth + "px;"
     }
     resizeMap();
-    $window.addEventListener("resize", resizeMap, true);
     $scope.userMarker;
     ApiService.getThings()
         .then(function(stops) {
@@ -291,5 +290,5 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
     }
     $scope.initMap()
     document.documentElement.style.overflow = 'hidden'; // firefox, chrome
-    document.body.scroll = "no"; // ie only
+    // document.body.scroll = "no"; // ie only
 });
