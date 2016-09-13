@@ -20,8 +20,8 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
             tap: false,
         });
         $scope.map.locate({
-            setView: true,
-            // watch: true
+            watch: true,
+            setView: true
         });
         $scope.userLocation = $scope.map.locate()._initialCenter;
         L.tileLayer('https://api.digitransit.fi/map/v1/{id}/{z}/{x}/{y}.png', {
@@ -124,6 +124,10 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
             color: "black"
         }).setRadius(8);
         $scope.userMarker.addTo($scope.map);
+        $scope.map.locate({
+            watch: true,
+            setView: false
+        });
     }
 
     $scope.addRoute = function(itineraries) {
