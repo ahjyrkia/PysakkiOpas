@@ -1,4 +1,4 @@
-MyApp.controller('IntroController', function($scope, ApiService, $http, leafletMarkerEvents, $window) {
+MyApp.controller('IntroController', function($scope, ApiService, PanelService, $http, leafletMarkerEvents, $window) {
     var resizeMap = function() {
         $scope.frameHeight = $window.innerHeight;
         $scope.frameWidth = $window.innerWidth;
@@ -10,8 +10,6 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
     ApiService.getThings()
         .then(function(stops) {
             $scope.stops = stops;
-            $scope.addUserMarker();
-            $scope.addMarker();
         })
     $scope.map, $scope.userLocation;
     $scope.initMap = function() {
@@ -22,12 +20,11 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
         $scope.map.locate({
             watch: true,
             setView: true
-            // enableHighAccuracy: true
         });
         $scope.userLocation = $scope.map.locate()._initialCenter;
         L.tileLayer('https://api.digitransit.fi/map/v1/{id}/{z}/{x}/{y}.png', {
             maxZoom: 16,
-            minZoom: 13,
+            minZoom: 14,
             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
                 '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ',
             id: 'hsl-map'
@@ -74,11 +71,9 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
     }
     $scope.distanceToDraw = function() {
         var zoom = $scope.map.getZoom();
-        var number = 0.0015;
-        for (var i = 1; i <= 17 - zoom || i < 4; i++) {
-            number = number * 2
-        }
-        return number;
+        if (zoom === 16) return 0.004;
+        if (zoom === 15) return 0.005;
+        if (zoom === 14) return 0.009;
     }
     $scope.drawnStop = [], $scope.markers = [];
     $scope.addMarker = function() {
@@ -144,6 +139,7 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
         }
         $scope.routeTransferPopups = [];
         $scope.geoJSONLayers = [];
+        $scope.routeInformation = [];
         for (var i = 0; i < itineraries.length; i++) {
             for (var j = 0; j < itineraries[i].legs.length; j++) {
                 var coordinates = [];
@@ -156,7 +152,7 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
                     "coordinates": coordinates,
                 }];
                 var myStyle = {
-                    "color": $scope.routeColorByType(itineraries[i].legs[j].mode),
+                    "color": PanelService.routeColorByType(itineraries[i].legs[j].mode),
                     "weight": 5,
                     "opacity": 0.65
                 };
@@ -172,6 +168,7 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
                     "autoPan": autoPan,
                     "closeOnClick": false
                 }
+                $scope.routeInformation.push(itineraries[i].legs[j]);
                 var transferPopup = L.popup(popupOptions)
                     .setLatLng([itineraries[i].legs[j].from.lat, itineraries[i].legs[j].from.lon])
                     .setContent($scope.popupDepartureContent(itineraries[i].legs[j]));
@@ -179,12 +176,15 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
                 $scope.geoJSONLayers.push(geoJSONLayer);
             }
         }
+        document.getElementById("routepanel").innerHTML = PanelService.getPanelElements($scope.routeInformation);
+        $scope.heit = 30 + $scope.routeInformation.length * 25 + "px";
         for (var i = 0; i < $scope.geoJSONLayers.length; i++) {
             $scope.geoJSONLayers[i].addTo($scope.map);
         }
         for (var i = 0; i < $scope.routeTransferPopups.length; i++) {
             $scope.routeTransferPopups[i].addTo($scope.map);
         }
+        // $('footer').slideToggle(200);
     }
 
     $scope.popupDepartureContent = function(leg) {
@@ -199,7 +199,7 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
             var hours = "0" + hours;
         }
         var content = "<b style=margin:0px;padding:0px>" + hours + ":" + minutes + " </b>"
-        var color = $scope.routeColorByType(leg.mode);
+        var color = PanelService.routeColorByType(leg.mode);
         if (leg.mode === "WALK") {
             content = content + "<b style=margin:0px;padding:0px;color:" + color + ">walk </b>"
         } else if (leg.route.shortName != null) {
@@ -210,27 +210,6 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
             content = content + "<b style=margin:0px;padding:0px;> " + leg.trip.tripHeadsign + "</b>"
         }
         return content;
-    }
-    $scope.routeColorByType = function(type) {
-        if (type === "WALK") {
-            return "#00cc99";
-        }
-        if (type === "BUS") {
-            return "#0066cc";
-        }
-        if (type === "TRAM") {
-            return "#00cc00";
-        }
-        if (type === "SUBWAY") {
-            return "DarkOrange";
-        }
-        if (type === "RAIL") {
-            return "#cc00cc";
-        }
-        if (type === "FERRY") {
-            return "Coral";
-        }
-        return "Grey";
     }
 
     $scope.colorByType = function(type) {
@@ -294,7 +273,14 @@ MyApp.controller('IntroController', function($scope, ApiService, $http, leafletM
                 $scope.addRoute(json.data.plan.itineraries)
             })
     }
-    $scope.initMap()
+
+    jQuery(function($) {
+        $('.footer').on('click', function() {
+            $('footer').slideToggle(200);
+        });
+
+    });
+    $scope.initMap();
     document.documentElement.style.overflow = 'hidden'; // firefox, chrome
     // document.body.scroll = "no"; // ie only
 });

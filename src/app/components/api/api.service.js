@@ -4,8 +4,7 @@ MyApp.service("ApiService", function($http) {
     }
 
     this.getThings = function() {
-        console.log(window.env.API_URL+"/stop")
-        return $http.get(window.env.API_URL+"/stop")
+        return $http.get(window.env.API_URL + "/stop")
             .then(function(response) {
                 return response.data;
             })
@@ -16,7 +15,7 @@ MyApp.service("ApiService", function($http) {
     }
 
     this.getTimetables = function(id) {
-        return $http.get(window.env.API_URL+"/stop/" + id)
+        return $http.get(window.env.API_URL + "/stop/" + id)
             .then(function(response) {
                 return response.data;
             })
@@ -28,7 +27,7 @@ MyApp.service("ApiService", function($http) {
 
     this.getRoute = function(origin, destination) {
         // console.log("http://localhost:3332/route/" + origin.lat +"+"+ origin.lng +"+"+ destination.lat +"+"+ destination.lng)
-        return $http.get(window.env.API_URL+"/route/" + origin.lat + "+" + origin.lng + "+" + destination.lat + "+" + destination.lng)
+        return $http.get(window.env.API_URL + "/route/" + origin.lat + "+" + origin.lng + "+" + destination.lat + "+" + destination.lng)
             .then(function(response) {
                 return response.data;
             })
@@ -39,8 +38,8 @@ MyApp.service("ApiService", function($http) {
     }
 
     this.getRouteByAddress = function(origin, destination) {
-        console.log(window.env.API_URL+"/routes/" + origin + "+" + destination)
-        return $http.get(window.env.API_URL+"/routes/" + origin + "+" + destination)
+        console.log(window.env.API_URL + "/routes/" + origin + "+" + destination)
+        return $http.get(window.env.API_URL + "/routes/" + origin + "+" + destination)
             .then(function(response) {
                 return response.data;
             })
@@ -51,7 +50,7 @@ MyApp.service("ApiService", function($http) {
     }
 
     this.getAddress = function(coordinates) {
-        return $http.get(window.env.API_URL+"/origin/" + coordinates.lat + "," + coordinates.lng)
+        return $http.get(window.env.API_URL + "/origin/" + coordinates.lat + "," + coordinates.lng)
             .then(function(response) {
                 return response.data;
             })
