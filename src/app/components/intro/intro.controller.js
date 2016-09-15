@@ -10,6 +10,7 @@ MyApp.controller('IntroController', function($scope, ApiService, PanelService, $
     ApiService.getThings()
         .then(function(stops) {
             $scope.stops = stops;
+            $scope.addMarker();
         })
     $scope.map, $scope.userLocation;
     $scope.initMap = function() {
@@ -184,7 +185,7 @@ MyApp.controller('IntroController', function($scope, ApiService, PanelService, $
         for (var i = 0; i < $scope.routeTransferPopups.length; i++) {
             $scope.routeTransferPopups[i].addTo($scope.map);
         }
-        // $('footer').slideToggle(200);
+        $('footer').slideToggle(200);
     }
 
     $scope.popupDepartureContent = function(leg) {
