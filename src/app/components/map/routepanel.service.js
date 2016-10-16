@@ -1,6 +1,7 @@
 MyApp.service("PanelService", function($http) {
     this.getPanelElements = function(legs) {
         var content = "";
+        if (legs[0].startTime == null) return "";
         for (var i = 0; i < legs.length; i++) {
             var leg = legs[i];
             var time = new Date(leg.startTime);
@@ -29,6 +30,7 @@ MyApp.service("PanelService", function($http) {
             }
             content = content + "<b id=endTime> " + endHours + ":" + endMinutes + "</b><br>"
         }
+        console.log(content)
         return content;
     }
 

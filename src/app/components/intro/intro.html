@@ -1,10 +1,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-<input class="input" id="origin" type="text" size="9" autocomplete="off" autocapitalize="off" placeholder="Origin" style="display:block;width:80%;z-index:1;position:absolute;margin-left:40px;top:10px;">
-<input class="input" id="destination" type="text" size="9" autocomplete="off" autocapitalize="off" placeholder="Where to?" style="display:block;width:80%;z-index:1;position:absolute;margin-left:40px;top:25px;margin-top:20px;">
-<input class="button" ng-click=searchButtonEvent() id="destinationbutton" type="submit" value="asdf" style="display:block;width:40px;z-index:2;position:absolute;margin-left:80%;top:25px;margin-top:20px;">
+<input class="input" id="origin" type="text" size="9" autocomplete="off" autocapitalize="off" placeholder="Origin" style="display:block;width:85%;z-index:1;position:absolute;margin-left:40px;top:10px;">
+<input class="input" id="destination" type="text" size="9" autocomplete="off" autocapitalize="off" placeholder="Where to?" style="display:block;width:85%;z-index:1;position:absolute;margin-left:40px;top:25px;margin-top:20px;">
+<input class="button" ng-click=searchButtonEvent() id="destinationbutton" type="submit" value="go" style="display:block;width:42px;z-index:2;position:absolute;margin-left:85%;top:25px;margin-top:20px;">
 
-<a href="#" style="display:block;width:40px;z-index:4;position:absolute;bottom:20px;" class="footer">Route</a>
-<footer style="height:{{heit}};">
-    <div style="white-space:nowrap;"id="routepanel"></div>
-</footer>
+<a href="#" style="z-index:4;position:absolute;bottom:5px;" class="footer">route info</a>
+
 <div id="map" style="height:{{frameHeight}}px; width:{{frameWidth}}px;" />
+<footer id="foot" style="height:100px;">
+    <div id="routepanel"></div>
+</footer>

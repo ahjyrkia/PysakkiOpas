@@ -1,4 +1,4 @@
-MyApp.controller('IntroController', function($scope, ApiService, PanelService, $http, leafletMarkerEvents, $window) {
+MyApp.controller('IntroController', function($scope, ApiService, PanelService, MarkerService, $http, leafletMarkerEvents, $window) {
     var resizeMap = function() {
         $scope.frameHeight = $window.innerHeight;
         $scope.frameWidth = $window.innerWidth;
@@ -48,39 +48,15 @@ MyApp.controller('IntroController', function($scope, ApiService, PanelService, $
         $scope.map.on('zoomend', function(e) {
             $scope.addMarker()
             for (var i = 0; i < $scope.markers.length; i++) {
-                $scope.markers[i].setRadius($scope.getRadiusByZoom());
+                $scope.markers[i].setRadius(MarkerService.markerRadiusByZoom($scope.map.getZoom()));
             }
         });
-    }
-    $scope.getRadiusByZoom = function() {
-        var newRadius, zoom = $scope.map.getZoom();
-        switch (true) {
-            case (zoom === 17):
-                newRadius = 8;
-                break;
-            case (zoom === 16):
-                newRadius = 6;
-                break;
-            case (zoom === 15):
-                newRadius = 3;
-                break;
-            case (zoom < 15 && zoom >= 13):
-                newRadius = 1;
-                break;
-        }
-        return newRadius;
-    }
-    $scope.distanceToDraw = function() {
-        var zoom = $scope.map.getZoom();
-        if (zoom === 16) return 0.004;
-        if (zoom === 15) return 0.005;
-        if (zoom === 14) return 0.009;
     }
     $scope.drawnStop = [], $scope.markers = [];
     $scope.addMarker = function() {
         var center = $scope.map.getCenter(),
-            dis = $scope.distanceToDraw(),
-            radius = $scope.getRadiusByZoom();
+            dis = MarkerService.distanceToDrawMarkersByZoom($scope.map.getZoom()),
+            radius = MarkerService.markerRadiusByZoom($scope.map.getZoom());
         for (var i = 0; i < $scope.stops.length; i++) {
             var stop = $scope.stops[i];
             var coords = stop.coords.split(",");
@@ -117,9 +93,7 @@ MyApp.controller('IntroController', function($scope, ApiService, PanelService, $
         if ($scope.userMarker != null) {
             $scope.map.removeLayer($scope.userMarker)
         }
-        $scope.userMarker = L.circleMarker($scope.userLocation, {
-            color: "black"
-        }).setRadius(8);
+        $scope.userMarker = MarkerService.createUserMarker($scope.userLocation);
         $scope.userMarker.addTo($scope.map);
         $scope.map.locate({
             watch: true,
@@ -178,14 +152,14 @@ MyApp.controller('IntroController', function($scope, ApiService, PanelService, $
             }
         }
         document.getElementById("routepanel").innerHTML = PanelService.getPanelElements($scope.routeInformation);
-        $scope.heit = 30 + $scope.routeInformation.length * 25 + "px";
+        var newSliderHeight = 30 + $scope.routeInformation.length * 20 + "px;";
+        document.getElementById("foot").style = "height:" + newSliderHeight;
         for (var i = 0; i < $scope.geoJSONLayers.length; i++) {
             $scope.geoJSONLayers[i].addTo($scope.map);
         }
         for (var i = 0; i < $scope.routeTransferPopups.length; i++) {
             $scope.routeTransferPopups[i].addTo($scope.map);
         }
-        $('footer').slideToggle(200);
     }
 
     $scope.popupDepartureContent = function(leg) {
@@ -272,6 +246,9 @@ MyApp.controller('IntroController', function($scope, ApiService, PanelService, $
         ApiService.getRouteByAddress(origin, destination)
             .then(function(json) {
                 $scope.addRoute(json.data.plan.itineraries)
+                if (!$('footer').is(':visible')) {
+                    $('footer').slideToggle(200);
+                }
             })
     }
 
