@@ -30,7 +30,6 @@ MyApp.service("PanelService", function($http) {
             }
             content = content + "<b id=endTime> " + endHours + ":" + endMinutes + "</b><br>"
         }
-        console.log(content)
         return content;
     }
 
