@@ -13,7 +13,7 @@ Simple routing advice and its itinerary information.
 Black circle is your location and the colored circles are transit stops. All circles except the black one should be clickable to retain information about next arrivals. Add your location, destination and press the button to get itinerary planning.
 
 # Backend
-Can be found from [here](https://github.com/ahjyrkia/pysakkiopas-backend/)
+Can be found from [here](https://github.com/ahjyrkia/pysakkiopas-backend/).
 
 # Demo
-Can be found on [Heroku](https://pysakkiopas.herokuapp.com)
+Can be found on [Heroku](https://pysakkiopas.herokuapp.com).
