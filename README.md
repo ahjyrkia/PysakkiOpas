@@ -16,4 +16,4 @@ Black circle is your location and the colored circles are transit stops. All cir
 Can be found from [here](https://github.com/ahjyrkia/pysakkiopas-backend/)
 
 # Demo
-[Heroku](https://pysakkiopas.herokuapp.com)
+Can be found on [Heroku](https://pysakkiopas.herokuapp.com)
