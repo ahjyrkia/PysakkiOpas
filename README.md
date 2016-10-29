@@ -1,6 +1,6 @@
 
 # Public transit arrivals
-Pysakkiopas provides information about all of HSL's public transit stops.
+Pysakkiopas provides "next to arrive"-information about all of HSL's public transit stops.
 
 ![stopdata](http://pove.arkku.net/upload/uploads/demo1.jpg)
 
